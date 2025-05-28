@@ -20,7 +20,7 @@ const productscehma = new mongoose.Schema({
   },
   images: [
     {
-      filename: {
+      image: {
         type: String,
         required: true,
       },
@@ -49,7 +49,7 @@ const productscehma = new mongoose.Schema({
   },
 
   seller:{
-    type:Number,
+    type:String,
     required: [true, "please enterthe product seller"],
     maxLength:[20,"product stock cannot exceed 20"]
   },
@@ -82,3 +82,4 @@ const productscehma = new mongoose.Schema({
 
 const product=mongoose.model('product',productscehma);
 module.exports=product;
+

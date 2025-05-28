@@ -3,7 +3,7 @@ const express=require('express');
 const mongoose=require('mongoose');
 const produtrotes=require('./routes/Productroute');
 const app=express();
-
+app.use(express.json());
 app.use('/api',produtrotes);
 app.listen(process.env.PORT,()=>{
     console.log(`server is listing in the port ${process.env.PORT}`);
