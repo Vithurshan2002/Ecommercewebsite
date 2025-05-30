@@ -3,6 +3,7 @@ const APIFetures=require('../utils/apiFeatures');
 //create product
 exports.addProduct = async (req, res, next) => {
   try {
+    req.body.user=req.userrr.id; // req.bodyla vantha datvudan user enra enoru fielda add panni athakuvaluevaka antha producta add panityavarin idya kudka poram..yar producta addpninathu enpathum scemala add panana..and req.userrr.id ithil req,user enpathu nam ueserathencationjs fila json tookeneduthu decode ppani edutha idaya req,user enra variblea stora pni irutha m antha idya than kudukuram ..ave thane add pni irupar productai
     const data = await Product.create(req.body);
     res.status(200).json({ message: data });
   } catch (error) {
