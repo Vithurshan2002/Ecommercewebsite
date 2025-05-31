@@ -3,12 +3,14 @@ const express=require('express');
 const mongoose=require('mongoose');
 const produtrotes=require('./routes/Productroute');
 const Authroutes=require('./routes/authroutes');
+const Orderroutes=require('./routes/orderroutes');
 const cp=require('cookie-parser');
 const app=express();
 app.use(express.json());
 app.use(cp());  // to access cookieproperty
 app.use('/api',produtrotes);
 app.use('/api',Authroutes);
+app.use('/api',Orderroutes)
 app.listen(process.env.PORT,()=>{
     console.log(`server is listing in the port ${process.env.PORT}`);
 });
