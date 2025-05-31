@@ -7,7 +7,7 @@ router.post('/product/new',userAuthenticate,addProduct);
 router.get('/allproducts',userAuthenticate,getAllProduct);  //two midlewares
 router.get('/singleproduct/:id',getSingleProduct);
 router.put('/updateproduct/:id',upDateProduct);
-router.delete('/deleteProduct/:id',userAuthenticate,Authorizeroles('admin'),deleteProduct);  // user token kidachu ..then kudipida rolea poruthian madum deleteproduct milldwarea access panni prodecta alikalm
 router.post('/findproduct',getProductByName);
-
+//for admin
+router.delete('/deleteProduct/:id',userAuthenticate,Authorizeroles('admin'),deleteProduct);  // user token kidachu ..then kudipida rolea poruthian madum deleteproduct milldwarea access panni prodecta alikalm
 module.exports=router;
