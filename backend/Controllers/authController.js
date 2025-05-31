@@ -1,6 +1,6 @@
 const User = require("../models/Usermodel");
 const sendEmail = require("../utils/email");
-
+const crypto = require("crypto");
 exports.registerUser = async (req, res, next) => {
   try {
     const { name, email, password, avatar } = req.body;
@@ -116,5 +116,50 @@ exports.forgetPassword = async (req, res, next) => {
     user.resetPasswordTokenExpire = undefined;
     await user.save({ validateBeforeSave: false });
     res.status(500).json({ message: err.message });
+  }
+};
+
+exports.resetpassword = async (req, res, next) => {
+  try {
+    const resetpassword = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex"); //rehash the hases reset passeword token
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordTokenExpire: {
+        //token expire akadil token expire date current data vida perisa irukum
+        $gt: Date.now(),
+      },
+    });
+
+    if (!user) {
+      return res
+        .json(401)
+        .json({ message: "password reset token is expired or Invalid" });
+    }
+    if (req.body.password !== req.body.confirmpassword) {
+      return res.json(401).json({ message: "password does not matched" });
+    }
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordTokenExpire = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    //set the cokkie likeuserresegeter,login
+    const token = user.getJWTToken();
+    const options = {
+      expires: new Date(
+        Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000 // Date.now() means ipavulla timela irunthu evalavu neram cookies expiresa irukanum enapathai plus poddu milli secondla kudukanum.. so 7daythan token expire time so cookieim 7 naal thn irukanum enpataal 7 naali milli secondala kudukuram
+      ),
+      httpOnly: true, //  intha cookiea http requesta than usepananum javascipt objectla use panna mudiyathu enpathaum kudukuram
+    };
+    res
+      .cookie("token", token,options)
+      .status(201)
+      .json({ message:user});
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(error);
   }
 };

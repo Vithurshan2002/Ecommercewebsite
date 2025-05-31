@@ -3,8 +3,7 @@ require("dotenv").config();
 
 const sendEmail = async (options) => {
   const transport = {
-    host: process.env.HOST,
-    port: Number(process.env.MAILPORT),
+   service:process.env.SERVICE,
     auth: {
       user: process.env.USER,
       pass: process.env.PASSWORD,
@@ -13,7 +12,7 @@ const sendEmail = async (options) => {
   const transpoter = nodemailer.createTransport(transport);
 
   const message = {
-    from: `${process.env.FROMNAME} <${process.env.FROMMAIL}>`,
+    from: process.env.USER,
     to: options.email,
     subject: options.subject,
     text: options.message,
