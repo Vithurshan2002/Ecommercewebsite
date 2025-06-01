@@ -20,7 +20,7 @@ const productscehma = new mongoose.Schema({
     required: [true, "please enter project description"],
   },
   ratings: {
-    type: String,
+    type: Number,
     default: 0,
   },
   images: [
@@ -59,19 +59,19 @@ const productscehma = new mongoose.Schema({
     required: [true, "please enterthe product seller"],
     maxLength: [20, "product stock cannot exceed 20"],
   },
-  numberOfReviews: {
+  numOfReviews: {
     type: Number,
     default: 0,
   },
   reviews: [
     // reviews kka niraya review varapothu so arraya kudkuram..athukulla object formatla data anupa poram so objectaa ethuram..antha  ovvoru objectukulla enena data irukumo athanudaya formataa kudukuram..athavathu araaykulla irukum ovoru reviewvum reviu elyutiayvar name, rating,antha kuripida revie irkum..
     {
-      name: {
-        type: String,
+      user: {
+        type:mongoose.Schema.ObjectId,
         required: true,
       },
       rating: {
-        type: String,
+        type: Number,
         required: true,
       },
       comment: {
