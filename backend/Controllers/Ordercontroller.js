@@ -1,5 +1,6 @@
 const Order = require("../models/Ordermodel");
 const Product = require("../models/productmodel");
+//add order -http://localhost:3000/api/order/neworder
 exports.newOrder = async (req, res, next) => {
   const {
     orderItems,
@@ -27,7 +28,7 @@ exports.newOrder = async (req, res, next) => {
   }
 };
 
-//get single order
+//get single order-http://localhost:3000/api/order/getsingleorder/:id
 exports.getSingleOrder = async (req, res, next) => {
   try {
     const data = await Order.findById(req.params.id).populate(
@@ -43,7 +44,7 @@ exports.getSingleOrder = async (req, res, next) => {
   }
 };
 
-//get  all orders of loggedin user
+//get  all orders of loggedin user -http://localhost:3000/api/order/myOrders/683af3a257a88bc43d6176ed
 exports.myOrders = async (req, res, next) => {
   try {
     const data = await Order.find({ user: req.userrr.id }); // user is the field of order schema
@@ -58,7 +59,7 @@ exports.myOrders = async (req, res, next) => {
 
 //for admin
 
-//get all orders of all user
+//get all orders of all user -http://localhost:3000/api/order/allorders
 exports.getAllorders = async (req, res, next) => {
   try {
     const data = await Order.find();
@@ -72,6 +73,7 @@ exports.getAllorders = async (req, res, next) => {
 };
 
 //UpdateOrder(after buy the number of product ,then reduce the amount of quantity from full stoke)
+// http://localhost:3000/api/order/updatestoke/:id
 exports.updateOrder = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -107,7 +109,7 @@ async function updateStoke(productid, quantity) {
   }
 }
 
-//deleteorder
+//deleteorder -http://localhost:3000/api/order/deleteorder/:id
 exports.deleteOrder = async (req, res, next) => {
   try {
     const data = await Order.findByIdAndDelete(req.params.id);

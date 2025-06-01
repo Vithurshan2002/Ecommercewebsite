@@ -193,7 +193,7 @@ exports.changePassword = async (req, res, next) => {
   }
 };
 
-//update profiledetails
+//update profiledetails -http://localhost:3000/api/updateprofile
 exports.updateProfile = async (req, res, next) => {
   const newuser = {
     name: req.body.name,
@@ -214,7 +214,7 @@ exports.updateProfile = async (req, res, next) => {
 
 //for adminnnn
 
-//get all user
+//get all user -http://localhost:3000/api/admin/getalluserdetails
 exports.getAllUser = async (req, res, next) => {
   try {
     const data = await User.find();
@@ -227,7 +227,7 @@ exports.getAllUser = async (req, res, next) => {
   }
 };
 
-// get a specific user
+// get a specific user -http://localhost:3000/api/admin/getuserprofile/:id
 exports.getSpecificUser = async (req, res, next) => {
   try {
     const data = await User.findById(req.params.id);
@@ -242,7 +242,7 @@ exports.getSpecificUser = async (req, res, next) => {
   }
 };
 
-//update a user
+//update a user -http://localhost:3000/api/admin/updateuserprofile/:id
 exports.upDateUser = async (req, res, next) => {
    const newdata = {
     name: req.body.name,
@@ -264,7 +264,7 @@ exports.upDateUser = async (req, res, next) => {
   }
 };
 
-//delete user
+//delete user -http://localhost:3000/api/admin/deleteuserProfile/:id
 exports.deleteuser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);

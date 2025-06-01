@@ -1,6 +1,6 @@
 const Product = require("../models/productmodel");
 const APIFetures = require("../utils/apiFeatures");
-//create product
+//create product -http://localhost:3000/api/product/new
 exports.addProduct = async (req, res, next) => {
   try {
     req.body.user = req.userrr.id; // req.bodyla vantha datvudan user enra enoru fielda add panni athakuvaluevaka antha producta add panityavarin idya kudka poram..yar producta addpninathu enpathum scemala add panana..and req.userrr.id ithil req,user enpathu nam ueserathencationjs fila json tookeneduthu decode ppani edutha idaya req,user enra variblea stora pni irutha m antha idya than kudukuram ..ave thane add pni irupar productai
@@ -11,7 +11,7 @@ exports.addProduct = async (req, res, next) => {
   }
 };
 
-//get a single product
+//get a single product-http://localhost:3000/api/singleproduct/:id
 exports.getSingleProduct = async (req, res, next) => {
   try {
     const data = await Product.findById(req.params.id);
@@ -21,7 +21,7 @@ exports.getSingleProduct = async (req, res, next) => {
   }
 };
 
-//get all products
+//get all products -http://localhost:3000/api/allproducts
 exports.getAllProduct = async (req, res, next) => {
   try {
     const data = await Product.find();
@@ -34,7 +34,7 @@ exports.getAllProduct = async (req, res, next) => {
   }
 };
 
-//update product
+//update product -http://localhost:3000/api/updateproduct/:id
 exports.upDateProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -48,7 +48,7 @@ exports.upDateProduct = async (req, res, next) => {
   }
 };
 
-//delete a product
+//delete a product-http://localhost:3000/api/deleteProduct/:id
 exports.deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -62,7 +62,7 @@ exports.deleteProduct = async (req, res, next) => {
   }
 };
 
-//search  products by name
+//search  products by name -http://localhost:3000/api/findproduct?keyword=oppo
 exports.getProductByName = async (req, res, next) => {
   try {
     const resPerPage = 1;
@@ -138,7 +138,7 @@ exports.getAllReview = async (req, res, next) => {
   }
 };
 
-//delete review
+//delete review http://localhost:3000/api/review?reviewid=683beceab06fd5e220bff05c&productid=68373c4666263664fa989425
 exports.deleteReview = async (req, res, next) => {
   try {
    
